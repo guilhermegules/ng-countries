@@ -1,0 +1,11 @@
+@import 'variables';
+
+:host {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: map-get($colors, very-light-gray);
+  }
+}
