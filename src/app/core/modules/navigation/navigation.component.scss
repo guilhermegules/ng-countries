@@ -6,6 +6,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background-color: map-get($colors, very-light-gray);
+    background-color: map-get($colors, white);
+  }
+
+  span {
+    cursor: pointer;
   }
 }
