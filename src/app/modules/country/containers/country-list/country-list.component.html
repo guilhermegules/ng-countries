@@ -1,1 +1,18 @@
-<p>country-list works!</p>
+<section class="country-list">
+  <div class="country-list__input-container">
+    <!-- TODO: create search input component and select component -->
+    <input type="text" />
+    <select>
+      <option value="" selected disabled hidden>Filter by region</option>
+      <option *ngFor="let item of regions" [value]="item.value">
+        {{ item.label }}
+      </option>
+    </select>
+  </div>
+
+  <div class="country-list__cards-container">
+    <div *ngFor="let country of countries$ | async">
+      <app-country-card [country]="country"></app-country-card>
+    </div>
+  </div>
+</section>
