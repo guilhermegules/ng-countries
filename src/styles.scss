@@ -11,3 +11,19 @@
 body {
   background-color: map-get($colors, very-light-gray);
 }
+
+input, select {
+  height: 40px;
+  border-radius: 5px;
+  border: 0;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.100);
+}
+
+input {
+  padding-left: 8px;
+}
+
+select {
+  padding: 10px;
+  background-color: map-get($colors, white);
+}
