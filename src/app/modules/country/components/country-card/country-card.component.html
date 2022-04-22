@@ -2,10 +2,10 @@
   <img
     class="card__image"
     [src]="country.flags.png"
-    [alt]="country.name + 'flag'"
+    [alt]="country.name.common + 'flag'"
   />
   <div class="card__info-container">
-    <h3 class="card__title">{{ country.name }}</h3>
+    <h3 class="card__title">{{ country.name.common }}</h3>
     <p class="card__info">
       <b>Population:</b> {{ country.population | number }}
     </p>

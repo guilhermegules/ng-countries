@@ -1,14 +1,24 @@
 <section class="country-list">
-  <div class="country-list__input-container">
-    <!-- TODO: create search input component and select component -->
-    <input type="text" />
-    <select>
-      <option value="" selected disabled hidden>Filter by region</option>
+  <form class="country-list__input-container" [formGroup]="form">
+    <div class="input-group">
+      <div class="input-group__prepend">
+        <ion-icon name="search"></ion-icon>
+      </div>
+      <input
+        type="text"
+        placeholder="Search for a country..."
+        formControlName="search"
+      />
+    </div>
+    <select formControlName="filter">
+      <option value="Filter by region" selected disabled hidden>
+        Filter by region
+      </option>
       <option *ngFor="let item of regions" [value]="item.value">
         {{ item.label }}
       </option>
     </select>
-  </div>
+  </form>
 
   <div class="country-list__cards-container">
     <div *ngFor="let country of countries$ | async">
