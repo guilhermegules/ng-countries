@@ -1,5 +1,8 @@
 export interface Country {
-  name: string;
+  name: {
+    common: string;
+    official: string;
+  };
   topLevelDomain: Array<string>;
   alpha2Code: string;
   alpha3Code: string;
