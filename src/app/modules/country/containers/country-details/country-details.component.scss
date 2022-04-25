@@ -3,10 +3,72 @@
 
   &__button {
     margin-bottom: 30px;
+
+    &--tiny {
+      height: 30px;
+    }
+  }
+
+  &__box-container {
+    display: grid;
+    grid-template-areas:
+      "box box"
+      "border-countries border-countries";
+      gap: 100px;
+
+      @media screen and (max-width: 512px){
+        gap: unset;
+        grid-template-areas:
+        "box box"
+        "border-countries";
+      }
+  }
+
+  &__box {
+    grid-area: "box";
+
+    p {
+      margin: 10px 0;
+    }
   }
 
   &__info {
     display: flex;
     justify-content: space-around;
+
+    img {
+      width: 100%;
+      padding-right: 70px;
+    }
+
+    @media screen and (max-width: 512px){
+      flex-direction: column;
+    }
+  }
+
+  &__border-countries {
+    grid-area: "border-countries";
+
+    @media screen and (max-width: 512px){
+      flex-direction: column;
+    }
+
+    &__buttons-container {
+      display: flex;
+
+      @media screen and (max-width: 512px){
+        margin-top: 10px;
+      }
+
+      :first-child{
+        margin: 0
+      }
+    }
+
+    button {
+      margin: 0 0 0 10px;
+
+
+    }
   }
 }

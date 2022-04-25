@@ -7,36 +7,44 @@
     </button>
 
     <div class="country-details__info">
-      <img [src]="country.flags.png" [alt]="country.name + ' flag'" />
+      <img [src]="country.flags.svg" [alt]="country.name.common + ' flag'" />
       <div>
         <h2>{{ country.name.common }}</h2>
-        <span>
-          <p><b>Native Name:</b> {{ country.name.official }}</p>
-          <p><b>Population:</b> {{ country.population | number }}</p>
-          <p><b>Region:</b> {{ country.region }}</p>
-          <p><b>Sub Region:</b> {{ country.subregion }}</p>
-          <p><b>Capital:</b> {{ country.capital }}</p>
-          <p><b>Top Level Domain:</b> {{ country.tld }}</p>
-          <p>
-            <b>Currencies:</b>
-            <span *ngFor="let currency of currencies">
-              {{ currency }}
-            </span>
-          </p>
-          <p>
-            <b>Languages:</b>
-            <span *ngFor="let language of languages"> {{ language }} </span>
-          </p>
-        </span>
-        <span>
-          <p>
+        <div class="country-details__box-container">
+          <span class="country-details__box">
+            <p><b>Native Name:</b> {{ country.name.official }}</p>
+            <p><b>Population:</b> {{ country.population | number }}</p>
+            <p><b>Region:</b> {{ country.region }}</p>
+            <p><b>Sub Region:</b> {{ country.subregion }}</p>
+            <p><b>Capital:</b> {{ country.capital }}</p>
+          </span>
+          <span class="country-details__box">
+            <p><b>Top Level Domain:</b> {{ country.tld }}</p>
+            <p>
+              <b>Currencies:</b>
+              <span *ngFor="let currency of currencies">
+                {{ currency }}
+              </span>
+            </p>
+            <p>
+              <b>Languages:</b>
+              <span *ngFor="let language of languages"> {{ language }} </span>
+            </p>
+          </span>
+          <span class="country-details__border-countries">
             <b>Border Countries:</b>
             <span *ngIf="!borderCountries.length">&nbsp;-</span>
-            <span *ngFor="let borderCountry of borderCountries">
-              {{ borderCountry }}
+            <span class="country-details__border-countries__buttons-container">
+              <button
+                class="country-details__button country-details__button--tiny"
+                *ngFor="let borderCountry of borderCountries"
+                (click)="getCountryByNameHandler(borderCountry, true)"
+              >
+                {{ borderCountry }}
+              </button>
             </span>
-          </p>
-        </span>
+          </span>
+        </div>
       </div>
     </div>
   </section>

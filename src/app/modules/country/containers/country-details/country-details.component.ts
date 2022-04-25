@@ -39,7 +39,20 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getCountryByName(this.route.snapshot.params['countryName'])
+    this.getCountryByNameHandler(this.route.snapshot.params['countryName']);
+  }
+
+  public ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  public getCountryByNameHandler(countryName: string, shouldSetLoader = false) {
+    if (shouldSetLoader) {
+      this.loading = true;
+    }
+
+    this.getCountryByName(countryName)
       .pipe(
         switchMap((country) => {
           this.country = country;
@@ -58,11 +71,6 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
       .subscribe((borderCountries) => {
         this.borderCountries = borderCountries;
       });
-  }
-
-  public ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
   }
 
   public getCountryByName(countryName: string) {
