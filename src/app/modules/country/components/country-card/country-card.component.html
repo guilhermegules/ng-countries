@@ -1,4 +1,4 @@
-<div *ngIf="country" class="card">
+<div *ngIf="country" class="card" (click)="onClick.emit(country)">
   <img
     class="card__image"
     [src]="country.flags.png"

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Country } from '../../models/country.model';
 
@@ -8,5 +8,9 @@ import { Country } from '../../models/country.model';
   styleUrls: ['./country-card.component.scss'],
 })
 export class CountryCardComponent {
-  @Input() country!: Country;
+  @Input()
+  public country!: Country;
+
+  @Output()
+  public onClick = new EventEmitter<Country>();
 }
