@@ -1,0 +1,12 @@
+.country-details {
+  padding: 30px;
+
+  &__button {
+    margin-bottom: 30px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-around;
+  }
+}

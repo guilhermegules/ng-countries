@@ -1,1 +1,39 @@
-<p>country-details works!</p>
+<section class="country-details" *ngIf="country">
+  <button class="country-details__button" routerLink="/">
+    <ion-icon name="arrow-back"></ion-icon>Back
+  </button>
+
+  <div class="country-details__info">
+    <img [src]="country.flags.png" [alt]="country.name + ' flag'" />
+    <div>
+      <h2>{{ country.name.common }}</h2>
+      <span>
+        <p><b>Native Name:</b> {{ country.name.official }}</p>
+        <p><b>Population:</b> {{ country.population | number }}</p>
+        <p><b>Region:</b> {{ country.region }}</p>
+        <p><b>Sub Region:</b> {{ country.subregion }}</p>
+        <p><b>Capital:</b> {{ country.capital }}</p>
+        <p><b>Top Level Domain:</b> {{ country.tld }}</p>
+        <p>
+          <b>Currencies:</b>
+          <span *ngFor="let currency of currencies">
+            {{ currency }}
+          </span>
+        </p>
+        <p>
+          <b>Languages:</b>
+          <span *ngFor="let language of languages"> {{ language }} </span>
+        </p>
+      </span>
+      <span>
+        <p>
+          <b>Border Countries:</b>
+          <span *ngIf="!borderCountries.length">&nbsp;-</span>
+          <span *ngFor="let borderCountry of borderCountries">
+            {{ borderCountry }}
+          </span>
+        </p>
+      </span>
+    </div>
+  </div>
+</section>
