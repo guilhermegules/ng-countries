@@ -12,6 +12,19 @@ body {
   background-color: map-get($colors, very-light-gray);
 }
 
+button {
+  background-color: map-get($colors, white);
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.100);
+  cursor: pointer;
+}
+
 input, select {
   height: 40px;
   border-radius: 5px;
