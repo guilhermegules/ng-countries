@@ -3,7 +3,7 @@ export interface Country {
     common: string;
     official: string;
   };
-  topLevelDomain: Array<string>;
+  tld: Array<string>;
   alpha2Code: string;
   alpha3Code: string;
   callingCodes: Array<string>;
@@ -20,8 +20,8 @@ export interface Country {
   nativeName: string;
   numericCode: string;
   flags: CountryFlagImageType;
-  currencies: Array<CountryCurrency>;
-  languages: Array<CountryLanguage>;
+  currencies: Record<string, { name: string; symbol: string }>;
+  languages: Record<string, string>;
   translations: CountryTranslation;
   flag: string;
   regionalBlocs: Array<CountryRegionalBlocs>;
@@ -32,13 +32,6 @@ export interface Country {
 export interface CountryRegionalBlocs {
   acronym: string;
   name: string;
-}
-
-export interface CountryLanguage {
-  iso639_1: string;
-  iso639_2: string;
-  name: string;
-  nativeName: string;
 }
 
 export interface CountryTranslation {
@@ -53,12 +46,6 @@ export interface CountryTranslation {
   ja: string;
   it: string;
   hu: string;
-}
-
-export interface CountryCurrency {
-  code: string;
-  name: string;
-  symbol: string;
 }
 
 export interface CountryFlagImageType {
