@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime, Observable, Subject, takeUntil } from 'rxjs';
 import { RegionEnum } from '../../enums/region.enum';
 
@@ -20,7 +21,8 @@ export class CountryListComponent implements OnInit, OnDestroy {
 
   constructor(
     private countryService: CountryService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -39,6 +41,10 @@ export class CountryListComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  public onCountryClick(country: Country) {
+    this.router.navigate(['details', country.name.common]);
   }
 
   private initForm() {
