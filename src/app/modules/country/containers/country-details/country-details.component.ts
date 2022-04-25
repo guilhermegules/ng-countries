@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import {
+  finalize,
+  forkJoin,
+  map,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+} from 'rxjs';
 
 import { Country } from '../../models/country.model';
 import { CountryService } from '../../services/country.service';
@@ -10,9 +18,12 @@ import { CountryService } from '../../services/country.service';
   templateUrl: './country-details.component.html',
   styleUrls: ['./country-details.component.scss'],
 })
-export class CountryDetailsComponent implements OnInit {
+export class CountryDetailsComponent implements OnInit, OnDestroy {
   public country!: Country;
   public borderCountries: string[] = [];
+  public loading = true;
+
+  private destroyed$ = new Subject<void>();
 
   constructor(
     private countryService: CountryService,
@@ -49,9 +60,17 @@ export class CountryDetailsComponent implements OnInit {
       });
   }
 
+  public ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   public getCountryByName(countryName: string) {
-    return this.countryService
-      .getCountryByName(countryName)
-      .pipe(map(([country]) => country));
+    return this.countryService.getCountryByName(countryName).pipe(
+      map(([country]) => country),
+      finalize(() => {
+        this.loading = false;
+      })
+    );
   }
 }

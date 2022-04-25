@@ -1,26 +1,33 @@
 @import "form-control";
 
-.country-list {
-  padding: 30px;
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &__input-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
+  .country-list {
+    padding: 30px;
 
-  &__cards-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-
-    @media screen and (min-width: 1920px) {
-      grid-template-columns: repeat(6, 1fr);
+    &__input-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
     }
 
-    @media screen and (max-width: 512px) {
-      grid-template-columns: 1fr;
-      padding: 30px;
+    &__cards-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+
+      @media screen and (min-width: 1920px) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      @media screen and (max-width: 512px) {
+        grid-template-columns: 1fr;
+        padding: 30px;
+      }
     }
   }
+
 }

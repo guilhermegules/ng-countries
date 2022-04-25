@@ -1,7 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, Observable, Subject, takeUntil } from 'rxjs';
+import {
+  debounceTime,
+  finalize,
+  Observable,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { RegionEnum } from '../../enums/region.enum';
 
 import { Country } from '../../models/country.model';
@@ -13,9 +21,10 @@ import { CountryService } from '../../services/country.service';
   styleUrls: ['./country-list.component.scss'],
 })
 export class CountryListComponent implements OnInit, OnDestroy {
-  public countries$!: Observable<Country[]>;
+  public countries!: Country[];
   public regions: { value: string; label: string }[] = [];
   public form!: FormGroup;
+  public loading = true;
 
   private destroyed$ = new Subject<void>();
 
@@ -28,7 +37,17 @@ export class CountryListComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.initForm();
 
-    this.countries$ = this.countryService.getAllCountries();
+    this.countryService
+      .getAllCountries()
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((countries) => {
+        this.countries = countries;
+      });
 
     this.regions = Object.values(RegionEnum).map((value) => ({
       value,
@@ -57,16 +76,38 @@ export class CountryListComponent implements OnInit, OnDestroy {
   private formFieldListeners() {
     this.form
       .get('search')
-      ?.valueChanges.pipe(debounceTime(500), takeUntil(this.destroyed$))
-      .subscribe((search) => {
-        this.countries$ = this.countryService.getCountryByName(search);
+      ?.valueChanges.pipe(
+        debounceTime(500),
+        tap(() => {
+          this.loading = true;
+        }),
+        switchMap((search) => this.countryService.getCountryByName(search)),
+        finalize(() => {
+          this.loading = false;
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((countries) => {
+        this.countries = countries;
       });
 
     this.form
       .get('filter')
-      ?.valueChanges.pipe(debounceTime(500), takeUntil(this.destroyed$))
-      .subscribe((filter) => {
-        this.countries$ = this.countryService.getCountriesByContinent(filter);
+      ?.valueChanges.pipe(
+        debounceTime(500),
+        tap(() => {
+          this.loading = true;
+        }),
+        switchMap((filter) =>
+          this.countryService.getCountriesByContinent(filter)
+        ),
+        finalize(() => {
+          this.loading = false;
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((countries) => {
+        this.countries = countries;
       });
   }
 }

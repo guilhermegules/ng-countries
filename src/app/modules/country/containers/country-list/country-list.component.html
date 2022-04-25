@@ -1,31 +1,39 @@
-<section class="country-list">
-  <form class="country-list__input-container" [formGroup]="form">
-    <div class="input-group">
-      <div class="input-group__prepend">
-        <ion-icon name="search"></ion-icon>
-      </div>
-      <input
-        type="text"
-        placeholder="Search for a country..."
-        formControlName="search"
-      />
-    </div>
-    <select formControlName="filter">
-      <option value="Filter by region" selected disabled hidden>
-        Filter by region
-      </option>
-      <option *ngFor="let item of regions" [value]="item.value">
-        {{ item.label }}
-      </option>
-    </select>
-  </form>
+<ng-template [ngTemplateOutlet]="loading ? loader : list"></ng-template>
 
-  <div class="country-list__cards-container">
-    <div *ngFor="let country of countries$ | async">
-      <app-country-card
-        [country]="country"
-        (onClick)="onCountryClick($event)"
-      ></app-country-card>
+<ng-template #list>
+  <section class="country-list">
+    <form class="country-list__input-container" [formGroup]="form">
+      <div class="input-group">
+        <div class="input-group__prepend">
+          <ion-icon name="search"></ion-icon>
+        </div>
+        <input
+          type="text"
+          placeholder="Search for a country..."
+          formControlName="search"
+        />
+      </div>
+      <select formControlName="filter">
+        <option value="Filter by region" selected disabled hidden>
+          Filter by region
+        </option>
+        <option *ngFor="let item of regions" [value]="item.value">
+          {{ item.label }}
+        </option>
+      </select>
+    </form>
+
+    <div class="country-list__cards-container">
+      <div *ngFor="let country of countries">
+        <app-country-card
+          [country]="country"
+          (onClick)="onCountryClick($event)"
+        ></app-country-card>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</ng-template>
+
+<ng-template #loader>
+  <app-loader [loading]="loading"></app-loader>
+</ng-template>

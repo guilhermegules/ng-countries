@@ -6,6 +6,7 @@ import { CountryListComponent } from './containers/country-list/country-list.com
 import { CountryDetailsComponent } from './containers/country-details/country-details.component';
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderModule } from '../../shared/modules/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     CountryDetailsComponent,
     CountryCardComponent,
   ],
-  imports: [CommonModule, CountryRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    CountryRoutingModule,
+    ReactiveFormsModule,
+    LoaderModule,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CountryModule {}
