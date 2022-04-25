@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  width: 100%;
+
+  .loader {
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border: 5px solid rgba(255, 255, 255);
+      border-color: rgb(0, 0, 0) rgb(0, 0, 0) rgba(255, 255, 255) rgba(255, 255, 255);
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: rotate 3s ease-in-out infinite;
+      transform: rotate(-200deg);
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      border-width: 10px;
+    }
+    25% {
+      border-width: 3px;
+    }
+    50% {
+      transform: rotate(115deg);
+      border-width: 10px;
+    }
+    75% {
+      border-width: 3px;
+    }
+    100% {
+      border-width: 10px;
+    }
+  }
+}
+
