@@ -39,7 +39,9 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
-    this.favIcon.href = '../../../../../assets/favicon.png';
+    if (this.favIcon) {
+      this.favIcon.href = '../../../../../assets/favicon.png';
+    }
   }
 
   public getCountryBasedOnBorderCountry(borderCountry: string) {
@@ -47,7 +49,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
     this.getCountryByNameHandler(borderCountry, true);
   }
 
-  private getCountryByName(countryName: string, isLoading = false) {
+  private getCountryByName(countryName: string) {
     return this.countryService.getCountryByName(countryName).pipe(
       map(([country]) => country),
       finalize(() => {
@@ -66,7 +68,9 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
         switchMap((country) => {
           this.country = country;
 
-          this.favIcon.href = country.flags.svg;
+          if (this.favIcon) {
+            this.favIcon.href = country.flags.svg;
+          }
 
           if (!country?.borders?.length) return of([]);
 
