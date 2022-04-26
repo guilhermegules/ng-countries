@@ -1,14 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {
-  finalize,
-  forkJoin,
-  map,
-  Observable,
-  of,
-  Subject,
-  switchMap,
-} from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize, forkJoin, map, of, Subject, switchMap } from 'rxjs';
 
 import { Country } from '../../models/country.model';
 import { CountryService } from '../../services/country.service';
@@ -24,10 +16,12 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   public loading = true;
 
   private destroyed$ = new Subject<void>();
+  private favIcon = document.querySelector('#app-icon') as HTMLLinkElement;
 
   constructor(
     private countryService: CountryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   get currencies() {
@@ -45,10 +39,25 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+    this.favIcon.href = '../../../../../assets/favicon.png';
   }
 
-  public getCountryByNameHandler(countryName: string, shouldSetLoader = false) {
-    if (shouldSetLoader) {
+  public getCountryBasedOnBorderCountry(borderCountry: string) {
+    this.router.navigate(['/details', borderCountry]);
+    this.getCountryByNameHandler(borderCountry, true);
+  }
+
+  private getCountryByName(countryName: string, isLoading = false) {
+    return this.countryService.getCountryByName(countryName).pipe(
+      map(([country]) => country),
+      finalize(() => {
+        this.loading = false;
+      })
+    );
+  }
+
+  private getCountryByNameHandler(countryName: string, isLoading = false) {
+    if (isLoading) {
       this.loading = true;
     }
 
@@ -56,6 +65,8 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((country) => {
           this.country = country;
+
+          this.favIcon.href = country.flags.svg;
 
           if (!country?.borders?.length) return of([]);
 
@@ -71,14 +82,5 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
       .subscribe((borderCountries) => {
         this.borderCountries = borderCountries;
       });
-  }
-
-  public getCountryByName(countryName: string) {
-    return this.countryService.getCountryByName(countryName).pipe(
-      map(([country]) => country),
-      finalize(() => {
-        this.loading = false;
-      })
-    );
   }
 }

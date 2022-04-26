@@ -38,7 +38,7 @@
               <button
                 class="country-details__button country-details__button--tiny"
                 *ngFor="let borderCountry of borderCountries"
-                (click)="getCountryByNameHandler(borderCountry, true)"
+                (click)="getCountryBasedOnBorderCountry(borderCountry)"
               >
                 {{ borderCountry }}
               </button>
