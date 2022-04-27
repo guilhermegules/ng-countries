@@ -38,11 +38,15 @@
 
     img {
       width: 100%;
-      padding-right: 70px;
+      max-width: 500px;
     }
 
     @media screen and (max-width: 512px){
       flex-direction: column;
+
+      img {
+        margin-bottom: 30px;
+      }
     }
   }
 
@@ -60,15 +64,13 @@
         margin-top: 10px;
       }
 
-      :first-child{
+      :first-child {
         margin: 0
       }
     }
 
     button {
       margin: 0 0 0 10px;
-
-
     }
   }
 }
