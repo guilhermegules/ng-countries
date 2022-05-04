@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
-@import './app/shared/styles/variables.scss';
+@import 'variables.scss';
 
 * {
   margin: 0;
@@ -8,12 +8,7 @@
   font-family: 'Nunito Sans', sans-serif;
 }
 
-body {
-  background-color: map-get($colors, very-light-gray);
-}
-
 button {
-  background-color: map-get($colors, white);
   width: 80px;
   height: 40px;
   display: flex;
@@ -38,5 +33,4 @@ input {
 
 select {
   padding: 10px;
-  background-color: map-get($colors, white);
 }
