@@ -28,6 +28,9 @@ Users should be able to:
 - [x] Click on a country to see more detailed information on a separate page
 - [x] Click through to the border countries on the detail page
 - [x] Toggle the color scheme between light and dark mode _(optional)_
+- [] Unit tests - 100% coverage
+- [] e2e/integration tests
+- [] Docker / docker-compose container
 
 ### Demo
 
