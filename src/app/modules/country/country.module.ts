@@ -7,6 +7,7 @@ import { CountryDetailsComponent } from './containers/country-details/country-de
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderModule } from '../../shared/modules/loader/loader.module';
+import { ThemeModule } from '../../core/modules/theme/theme.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoaderModule } from '../../shared/modules/loader/loader.module';
     CountryRoutingModule,
     ReactiveFormsModule,
     LoaderModule,
+    ThemeModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

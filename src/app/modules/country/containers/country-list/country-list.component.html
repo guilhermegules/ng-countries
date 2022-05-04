@@ -1,19 +1,26 @@
 <ng-template [ngTemplateOutlet]="loading ? loader : list"></ng-template>
 
 <ng-template #list>
-  <section class="country-list">
+  <section [appTheme]="{ color: 'color' }" class="country-list">
     <form class="country-list__input-container" [formGroup]="form">
       <div class="input-group">
-        <div class="input-group__prepend">
+        <div
+          class="input-group__prepend"
+          [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
+        >
           <ion-icon name="search"></ion-icon>
         </div>
         <input
           type="text"
           placeholder="Search for a country..."
           formControlName="search"
+          [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
         />
       </div>
-      <select formControlName="filter">
+      <select
+        formControlName="filter"
+        [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
+      >
         <option value="Filter by region" selected disabled hidden>
           Filter by region
         </option>

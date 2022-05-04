@@ -1,4 +1,9 @@
-<div *ngIf="country" class="card" (click)="onClick.emit(country)">
+<div
+  [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
+  *ngIf="country"
+  class="card"
+  (click)="onClick.emit(country)"
+>
   <img
     class="card__image"
     [src]="country.flags.png"

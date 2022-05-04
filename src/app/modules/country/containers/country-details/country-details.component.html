@@ -1,8 +1,16 @@
 <ng-template [ngTemplateOutlet]="loading ? loader : details"></ng-template>
 
 <ng-template #details>
-  <section class="country-details" *ngIf="country">
-    <button class="country-details__button" routerLink="/">
+  <section
+    [appTheme]="{ color: 'color' }"
+    class="country-details"
+    *ngIf="country"
+  >
+    <button
+      [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
+      class="country-details__button"
+      routerLink="/"
+    >
       <ion-icon name="arrow-back"></ion-icon>Back
     </button>
 
@@ -38,6 +46,10 @@
               <button
                 class="country-details__button country-details__button--tiny"
                 *ngFor="let borderCountry of borderCountries"
+                [appTheme]="{
+                  'background-color': 'backgroundColor',
+                  color: 'color'
+                }"
                 (click)="getCountryBasedOnBorderCountry(borderCountry)"
               >
                 {{ borderCountry }}
