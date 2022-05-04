@@ -1,9 +1,7 @@
-<nav>
+<nav [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }">
   <h2>Where in the world?</h2>
-  <span><ion-icon name="moon"></ion-icon> Dark Mode</span>
+  <span (click)="onChangeTheme()">
+    <ion-icon [name]="themeKey === 'light' ? 'sunny' : 'moon'"></ion-icon>
+    {{ themeKey | titlecase }} Mode
+  </span>
 </nav>
-
-<!--
-  TODO: add icon for theme switch
-  <ion-icon name="sunny"></ion-icon>
--->
