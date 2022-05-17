@@ -17,20 +17,19 @@ describe('ThemeService', () => {
 
   describe('setTheme', () => {
     it('should throw an error when the passed theme is not valid', () => {
-      expect(service.setTheme('test' as any)).toThrowError(
-        '`Could not find theme with name test'
-      );
+      expect(service.setTheme('test' as any)).toThrowError('`Could not find theme with name test');
     });
-    it('should set the light value on theme subject', (done) => {
+    it('should set the light value on theme subject', done => {
       service.setTheme(ThemeEnum.LIGHT);
 
-      service.theme$.subscribe((theme) => {
+      service.theme$.subscribe(theme => {
         expect(theme).toEqual({
           backgroundColor: '#ffffff',
           color: '#111517',
           themeKey: ThemeEnum.LIGHT,
           bodyColor: '#fafafa',
         });
+        done();
       });
     });
   });

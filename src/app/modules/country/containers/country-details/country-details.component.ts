@@ -12,17 +12,16 @@ import { CountryService } from '../../services/country.service';
 })
 export class CountryDetailsComponent implements OnInit, OnDestroy {
   public country!: Country;
+
   public borderCountries: string[] = [];
+
   public loading = true;
 
   private destroyed$ = new Subject<void>();
+
   private favIcon = document.querySelector('#app-icon') as HTMLLinkElement;
 
-  constructor(
-    private countryService: CountryService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private countryService: CountryService, private route: ActivatedRoute, private router: Router) {}
 
   get currencies() {
     return Object.keys(this.country.currencies);
@@ -33,7 +32,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getCountryByNameHandler(this.route.snapshot.params['countryName']);
+    this.getCountryByNameHandler(this.route.snapshot.params.countryName);
   }
 
   public ngOnDestroy(): void {
@@ -54,7 +53,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
       map(([country]) => country),
       finalize(() => {
         this.loading = false;
-      })
+      }),
     );
   }
 
@@ -65,7 +64,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
 
     this.getCountryByName(countryName)
       .pipe(
-        switchMap((country) => {
+        switchMap(country => {
           this.country = country;
 
           if (this.favIcon) {
@@ -74,16 +73,14 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
 
           if (!country?.borders?.length) return of([]);
 
-          const borderCountries = country.borders.map((border) =>
-            this.getCountryByName(border).pipe(
-              map((country) => country.name.common)
-            )
+          const borderCountries = country.borders.map(border =>
+            this.getCountryByName(border).pipe(map(country => country.name.common)),
           );
 
           return forkJoin(borderCountries);
-        })
+        }),
       )
-      .subscribe((borderCountries) => {
+      .subscribe(borderCountries => {
         this.borderCountries = borderCountries;
       });
   }

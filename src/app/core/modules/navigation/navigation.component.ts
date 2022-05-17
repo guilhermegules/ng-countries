@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ThemeEnum } from '../theme/enums/theme.enum';
 
@@ -17,11 +17,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(private themeService: ThemeService) {}
 
   public ngOnInit(): void {
-    this.themeService.theme$
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(({ themeKey }) => {
-        this.themeKey = themeKey;
-      });
+    this.themeService.theme$.pipe(takeUntil(this.destroyed$)).subscribe(({ themeKey }) => {
+      this.themeKey = themeKey;
+    });
   }
 
   public ngOnDestroy(): void {
@@ -30,8 +28,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   public onChangeTheme() {
-    this.themeService.setTheme(
-      this.themeKey === ThemeEnum.LIGHT ? ThemeEnum.DARK : ThemeEnum.LIGHT
-    );
+    this.themeService.setTheme(this.themeKey === ThemeEnum.LIGHT ? ThemeEnum.DARK : ThemeEnum.LIGHT);
   }
 }

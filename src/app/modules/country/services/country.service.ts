@@ -17,9 +17,7 @@ export class CountryService {
   }
 
   public getCountryByName(countryName: string): Observable<Country[]> {
-    return this.http.get<Country[]>(
-      `${this.API_URL}/name/${countryName.toLocaleLowerCase()}`
-    );
+    return this.http.get<Country[]>(`${this.API_URL}/name/${countryName.toLocaleLowerCase()}`);
   }
 
   public getCountriesByContinent(region: RegionEnum): Observable<Country[]> {

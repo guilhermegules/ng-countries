@@ -1,7 +1,4 @@
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RegionEnum } from '../enums/region.enum';
 
@@ -25,9 +22,7 @@ describe('CountryService', () => {
   it('should get all countries', () => {
     service.getAllCountries().subscribe();
 
-    const { request } = httpMock.expectOne(
-      'https://restcountries.com/v3.1/all'
-    );
+    const { request } = httpMock.expectOne('https://restcountries.com/v3.1/all');
 
     expect(request.method).toBe('GET');
   });
@@ -35,9 +30,7 @@ describe('CountryService', () => {
   it('should get country by name', () => {
     service.getCountryByName('brazil').subscribe();
 
-    const { request } = httpMock.expectOne(
-      'https://restcountries.com/v3.1/name/brazil'
-    );
+    const { request } = httpMock.expectOne('https://restcountries.com/v3.1/name/brazil');
 
     expect(request.method).toBe('GET');
   });
@@ -45,9 +38,7 @@ describe('CountryService', () => {
   it('should get countries by continent', () => {
     service.getCountriesByContinent(RegionEnum.AFRICA).subscribe();
 
-    const { request } = httpMock.expectOne(
-      'https://restcountries.com/v3.1/region/africa'
-    );
+    const { request } = httpMock.expectOne('https://restcountries.com/v3.1/region/africa');
 
     expect(request.method).toBe('GET');
   });

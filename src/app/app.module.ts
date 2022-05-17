@@ -8,12 +8,7 @@ import { NavigationModule } from './core/modules/navigation/navigation.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NavigationModule,
-    HttpClientModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, NavigationModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

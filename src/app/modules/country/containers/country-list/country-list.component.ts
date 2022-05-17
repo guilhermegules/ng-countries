@@ -1,15 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  debounceTime,
-  finalize,
-  Observable,
-  Subject,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { debounceTime, finalize, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { RegionEnum } from '../../enums/region.enum';
 
 import { Country } from '../../models/country.model';
@@ -22,17 +14,16 @@ import { CountryService } from '../../services/country.service';
 })
 export class CountryListComponent implements OnInit, OnDestroy {
   public countries!: Country[];
+
   public regions: { value: string; label: string }[] = [];
+
   public form!: FormGroup;
+
   public loading = true;
 
   private destroyed$ = new Subject<void>();
 
-  constructor(
-    private countryService: CountryService,
-    private fb: FormBuilder,
-    private router: Router
-  ) {}
+  constructor(private countryService: CountryService, private fb: FormBuilder, private router: Router) {}
 
   public ngOnInit(): void {
     this.initForm();
@@ -43,13 +34,13 @@ export class CountryListComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.loading = false;
         }),
-        takeUntil(this.destroyed$)
+        takeUntil(this.destroyed$),
       )
-      .subscribe((countries) => {
+      .subscribe(countries => {
         this.countries = countries;
       });
 
-    this.regions = Object.values(RegionEnum).map((value) => ({
+    this.regions = Object.values(RegionEnum).map(value => ({
       value,
       label: value[0].toUpperCase() + value.slice(1),
     }));
@@ -81,13 +72,13 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap((search) => this.countryService.getCountryByName(search)),
+        switchMap(search => this.countryService.getCountryByName(search)),
         finalize(() => {
           this.loading = false;
         }),
-        takeUntil(this.destroyed$)
+        takeUntil(this.destroyed$),
       )
-      .subscribe((countries) => {
+      .subscribe(countries => {
         this.countries = countries;
       });
 
@@ -98,15 +89,13 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap((filter) =>
-          this.countryService.getCountriesByContinent(filter)
-        ),
+        switchMap(filter => this.countryService.getCountriesByContinent(filter)),
         finalize(() => {
           this.loading = false;
         }),
-        takeUntil(this.destroyed$)
+        takeUntil(this.destroyed$),
       )
-      .subscribe((countries) => {
+      .subscribe(countries => {
         this.countries = countries;
       });
   }

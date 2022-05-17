@@ -12,11 +12,7 @@ describe('CountryListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CountryListComponent],
-      imports: [
-        HttpClientTestingModule,
-        ReactiveFormsModule,
-        RouterTestingModule,
-      ],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
     }).compileComponents();
   });
 
