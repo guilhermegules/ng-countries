@@ -32,7 +32,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getCountryByNameHandler(this.route.snapshot.params.countryName);
+    this.getCountryByNameHandler(this.route.snapshot.params['countryName']);
   }
 
   public ngOnDestroy(): void {

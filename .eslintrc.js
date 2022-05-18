@@ -18,5 +18,6 @@ module.exports = {
     'no-useless-constructor': 'off',
     'no-shadow': 'off',
     'no-use-before-define': 'off',
+    'dot-notation': 'off',
   },
 };
