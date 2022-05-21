@@ -125,7 +125,7 @@ describe('CountryDetailsComponent', () => {
 
       component.ngOnInit();
 
-      expect(component.borderCountries).toEqual(['Argentina']);
+      expect(component.borderCountries).toEqual(['Brazil']);
     });
   });
 
@@ -182,6 +182,11 @@ describe('CountryDetailsComponent', () => {
         },
       ];
       spyOn(countryService, 'getCountryByName').and.returnValue(of(countriesMock));
+      spyOn(router, 'navigate').and.callFake(() => {
+        return new Promise(resolve => {
+          resolve(true);
+        });
+      });
 
       component.getCountryBasedOnBorderCountry('argentina');
 
