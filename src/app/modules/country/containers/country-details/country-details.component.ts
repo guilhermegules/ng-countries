@@ -71,7 +71,7 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
             this.favIcon.href = country.flags.svg;
           }
 
-          if (!country?.borders?.length) return of([]);
+          if (!country?.borders.length) return of([]);
 
           const borderCountries = country.borders.map(border =>
             this.getCountryByName(border).pipe(map(country => country.name.common)),
