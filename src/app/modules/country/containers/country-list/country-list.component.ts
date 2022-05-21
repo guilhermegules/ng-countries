@@ -72,7 +72,7 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap(search => this.countryService.getCountryByName(search)),
+        switchMap(this.countryService.getCountryByName),
         finalize(() => {
           this.loading = false;
         }),
@@ -89,7 +89,7 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap(filter => this.countryService.getCountriesByContinent(filter)),
+        switchMap(this.countryService.getCountriesByRegion),
         finalize(() => {
           this.loading = false;
         }),

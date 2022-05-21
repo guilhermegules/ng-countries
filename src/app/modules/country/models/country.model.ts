@@ -20,7 +20,7 @@ export interface Country {
   nativeName: string;
   numericCode: string;
   flags: CountryFlagImageType;
-  currencies: Record<string, { name: string; symbol: string }>;
+  currencies: { name: string; symbol: string };
   languages: Record<string, string>;
   translations: CountryTranslation;
   flag: string;
