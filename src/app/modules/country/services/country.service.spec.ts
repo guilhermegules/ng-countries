@@ -13,6 +13,7 @@ describe('CountryService', () => {
       imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(CountryService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -35,8 +36,8 @@ describe('CountryService', () => {
     expect(request.method).toBe('GET');
   });
 
-  it('should get countries by continent', () => {
-    service.getCountriesByContinent(RegionEnum.AFRICA).subscribe();
+  it('should get countries by region', () => {
+    service.getCountriesByRegion(RegionEnum.AFRICA).subscribe();
 
     const { request } = httpMock.expectOne('https://restcountries.com/v3.1/region/africa');
 

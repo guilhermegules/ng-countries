@@ -20,7 +20,7 @@ export class CountryService {
     return this.http.get<Country[]>(`${this.API_URL}/name/${countryName.toLocaleLowerCase()}`);
   }
 
-  public getCountriesByContinent(region: RegionEnum): Observable<Country[]> {
+  public getCountriesByRegion(region: RegionEnum): Observable<Country[]> {
     return this.http.get<Country[]>(`${this.API_URL}/region/${region}`);
   }
 }
