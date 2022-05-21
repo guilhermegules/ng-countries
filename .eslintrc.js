@@ -19,5 +19,6 @@ module.exports = {
     'no-shadow': 'off',
     'no-use-before-define': 'off',
     'dot-notation': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };
