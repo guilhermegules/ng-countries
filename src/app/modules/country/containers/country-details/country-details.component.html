@@ -1,21 +1,18 @@
 <ng-template [ngTemplateOutlet]="loading ? loader : details"></ng-template>
 
 <ng-template #details>
-  <section
-    [appTheme]="{ color: 'color' }"
-    class="country-details"
-    *ngIf="country"
-  >
+  <section [appTheme]="{ color: 'color' }" class="country-details" *ngIf="country">
     <button
       [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
       class="country-details__button"
       routerLink="/"
+      data-testid="redirect-button"
     >
       <ion-icon name="arrow-back"></ion-icon>Back
     </button>
 
     <div class="country-details__info">
-      <img [src]="country.flags.svg" [alt]="country.name.common + ' flag'" />
+      <img data-testid="details-country-image" [src]="country.flags.svg" [alt]="country.name.common + ' flag'" />
       <div>
         <h2>{{ country.name.common }}</h2>
         <div class="country-details__box-container">
@@ -44,8 +41,9 @@
             <span *ngIf="!borderCountries.length">&nbsp;-</span>
             <span class="country-details__border-countries__buttons-container">
               <button
-                class="country-details__button country-details__button--tiny"
                 *ngFor="let borderCountry of borderCountries"
+                class="country-details__button country-details__button--tiny"
+                data-testid="country-details-border-country-button"
                 [appTheme]="{
                   'background-color': 'backgroundColor',
                   color: 'color'

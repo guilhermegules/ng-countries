@@ -4,26 +4,23 @@
   <section [appTheme]="{ color: 'color' }" class="country-list">
     <form class="country-list__input-container" [formGroup]="form">
       <div class="input-group">
-        <div
-          class="input-group__prepend"
-          [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
-        >
+        <div class="input-group__prepend" [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }">
           <ion-icon name="search"></ion-icon>
         </div>
         <input
           type="text"
           placeholder="Search for a country..."
           formControlName="search"
+          data-testid="search-input"
           [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
         />
       </div>
       <select
         formControlName="filter"
+        data-testid="filter-select"
         [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }"
       >
-        <option value="Filter by region" selected disabled hidden>
-          Filter by region
-        </option>
+        <option value="Filter by region" selected disabled hidden>Filter by region</option>
         <option *ngFor="let item of regions" [value]="item.value">
           {{ item.label }}
         </option>
@@ -31,11 +28,8 @@
     </form>
 
     <div class="country-list__cards-container">
-      <div *ngFor="let country of countries">
-        <app-country-card
-          [country]="country"
-          (onClick)="onCountryClick($event)"
-        ></app-country-card>
+      <div *ngFor="let country of countries; let i = index" [attr.data-testid]="'country-card-' + i">
+        <app-country-card [country]="country" (onClick)="onCountryClick($event)"></app-country-card>
       </div>
     </div>
   </section>

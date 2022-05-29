@@ -23,4 +23,12 @@ export class CountryService {
   public getCountriesByRegion(region: RegionEnum): Observable<Country[]> {
     return this.http.get<Country[]>(`${this.API_URL}/region/${region}`);
   }
+
+  public getCountryByCode(code: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.API_URL}/alpha/${code}`);
+  }
+
+  public getCountryByCodes(codes: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.API_URL}/alpha?codes=${codes}`);
+  }
 }

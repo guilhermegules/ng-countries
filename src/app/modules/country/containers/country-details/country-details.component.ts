@@ -24,11 +24,11 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
   constructor(private countryService: CountryService, private route: ActivatedRoute, private router: Router) {}
 
   get currencies() {
-    return Object.keys(this.country.currencies);
+    return this.country?.currencies ? Object.keys(this.country.currencies) : [];
   }
 
   get languages() {
-    return Object.values(this.country.languages);
+    return this.country?.languages ? Object.values(this.country.languages) : [];
   }
 
   public ngOnInit(): void {
@@ -71,13 +71,11 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
             this.favIcon.href = country.flags.svg;
           }
 
-          if (!country?.borders.length) return of([]);
+          if (!country.borders?.length) return of([]);
 
-          const borderCountries = country.borders.map(border =>
-            this.getCountryByName(border).pipe(map(country => country.name.common)),
-          );
-
-          return forkJoin(borderCountries);
+          return this.countryService
+            .getCountryByCodes(country.borders.toString())
+            .pipe(map(countries => countries.flatMap(country => country.name.common)));
         }),
       )
       .subscribe(borderCountries => {
