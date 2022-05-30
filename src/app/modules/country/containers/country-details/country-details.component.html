@@ -41,9 +41,9 @@
             <span *ngIf="!borderCountries.length">&nbsp;-</span>
             <span class="country-details__border-countries__buttons-container">
               <button
-                *ngFor="let borderCountry of borderCountries"
+                *ngFor="let borderCountry of borderCountries; let i = index"
                 class="country-details__button country-details__button--tiny"
-                data-testid="country-details-border-country-button"
+                [attr.data-testid]="'country-details-border-country-button-' + i"
                 [appTheme]="{
                   'background-color': 'backgroundColor',
                   color: 'color'

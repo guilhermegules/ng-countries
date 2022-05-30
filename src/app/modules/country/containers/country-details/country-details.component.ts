@@ -73,6 +73,8 @@ export class CountryDetailsComponent implements OnInit, OnDestroy {
 
           if (!country.borders?.length) return of([]);
 
+          console.log(country.borders);
+
           return this.countryService
             .getCountryByCodes(country.borders.toString())
             .pipe(map(countries => countries.flatMap(country => country.name.common)));

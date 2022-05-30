@@ -1,6 +1,6 @@
 <nav [appTheme]="{ 'background-color': 'backgroundColor', color: 'color' }">
   <h2>Where in the world?</h2>
-  <span (click)="onChangeTheme()">
+  <span (click)="onChangeTheme()" data-testid="change-theme-button">
     <ion-icon [name]="themeKey === 'light' ? 'sunny' : 'moon'"></ion-icon>
     {{ themeKey | titlecase }} Mode
   </span>

@@ -1,0 +1,75 @@
+[
+  {
+    "name": {
+      "common": "Haiti",
+      "official": "Republic of Haiti",
+      "nativeName": {
+        "fra": { "official": "République d'Haïti", "common": "Haïti" },
+        "hat": { "official": "Repiblik Ayiti", "common": "Ayiti" }
+      }
+    },
+    "tld": [".ht"],
+    "cca2": "HT",
+    "ccn3": "332",
+    "cca3": "HTI",
+    "cioc": "HAI",
+    "independent": true,
+    "status": "officially-assigned",
+    "unMember": true,
+    "currencies": { "HTG": { "name": "Haitian gourde", "symbol": "G" } },
+    "idd": { "root": "+5", "suffixes": ["09"] },
+    "capital": ["Port-au-Prince"],
+    "altSpellings": ["HT", "Republic of Haiti", "République d'Haïti", "Repiblik Ayiti"],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "languages": { "fra": "French", "hat": "Haitian Creole" },
+    "translations": {
+      "ara": { "official": "جمهورية هايتي", "common": "هايتي" },
+      "ces": { "official": "Republika Haiti", "common": "Haiti" },
+      "cym": { "official": "Republic of Haiti", "common": "Haiti" },
+      "deu": { "official": "Republik Haiti", "common": "Haiti" },
+      "est": { "official": "Haiti Vabariik", "common": "Haiti" },
+      "fin": { "official": "Haitin tasavalta", "common": "Haiti" },
+      "fra": { "official": "République d'Haïti", "common": "Haïti" },
+      "hrv": { "official": "Republika Haiti", "common": "Haiti" },
+      "hun": { "official": "Haiti Köztársaság", "common": "Haiti" },
+      "ita": { "official": "Repubblica di Haiti", "common": "Haiti" },
+      "jpn": { "official": "ハイチ共和国", "common": "ハイチ" },
+      "kor": { "official": "아이티 공화국", "common": "아이티" },
+      "nld": { "official": "Republiek Haïti", "common": "Haïti" },
+      "per": { "official": "جمهوری هائیتی", "common": "هائیتی" },
+      "pol": { "official": "Republika Haiti", "common": "Haiti" },
+      "por": { "official": "República do Haiti", "common": "Haiti" },
+      "rus": { "official": "Республика Гаити", "common": "Гаити" },
+      "slk": { "official": "Haitská republika", "common": "Haiti" },
+      "spa": { "official": "República de Haití", "common": "Haití" },
+      "swe": { "official": "Republiken Haiti", "common": "Haiti" },
+      "urd": { "official": "جمہوریہ ہیٹی", "common": "ہیٹی" },
+      "zho": { "official": "海地共和国", "common": "海地" }
+    },
+    "latlng": [19.0, -72.41666666],
+    "landlocked": false,
+    "borders": ["DOM"],
+    "area": 27750.0,
+    "demonyms": { "eng": { "f": "Haitian", "m": "Haitian" }, "fra": { "f": "Haïtienne", "m": "Haïtien" } },
+    "flag": "\uD83C\uDDED\uD83C\uDDF9",
+    "maps": {
+      "googleMaps": "https://goo.gl/maps/9o13xtjuUdqFnHbn9",
+      "openStreetMaps": "https://www.openstreetmap.org/relation/307829"
+    },
+    "population": 11402533,
+    "gini": { "2012": 41.1 },
+    "fifa": "HAI",
+    "car": { "signs": ["RH"], "side": "right" },
+    "timezones": ["UTC-05:00"],
+    "continents": ["North America"],
+    "flags": { "png": "https://flagcdn.com/w320/ht.png", "svg": "https://flagcdn.com/ht.svg" },
+    "coatOfArms": {
+      "png": "https://mainfacts.com/media/images/coats_of_arms/ht.png",
+      "svg": "https://mainfacts.com/media/images/coats_of_arms/ht.svg"
+    },
+    "startOfWeek": "monday",
+    "capitalInfo": { "latlng": [18.53, -72.33] },
+    "postalCode": { "format": "HT####", "regex": "^(?:HT)*(\\d{4})$" }
+  }
+]

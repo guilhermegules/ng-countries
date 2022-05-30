@@ -66,6 +66,29 @@ describe('CountryDetailsComponent', () => {
     it('should return the languages', () => {
       expect(component.languages).toEqual(['pt-BR']);
     });
+
+    it('should return an empty array if have no currencies', () => {
+      component.country = {
+        currencies: null,
+        languages: {
+          ptBr: 'pt-BR',
+        },
+      } as any;
+
+      expect(component.currencies).toEqual([]);
+    });
+
+    it('should return an empty array if have no languages', () => {
+      component.country = {
+        currencies: {
+          name: 'Real',
+          symbol: 'BRL',
+        },
+        languages: null,
+      } as any;
+
+      expect(component.languages).toEqual([]);
+    });
   });
 
   describe('ngOnInit', () => {
@@ -122,6 +145,7 @@ describe('CountryDetailsComponent', () => {
         },
       ];
       spyOn(countryService, 'getCountryByName').and.returnValue(of(countriesMock));
+      spyOn(countryService, 'getCountryByCodes').and.returnValue(of(countriesMock));
 
       component.ngOnInit();
 

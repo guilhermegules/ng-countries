@@ -43,4 +43,20 @@ describe('CountryService', () => {
 
     expect(request.method).toBe('GET');
   });
+
+  it('should get country by code', () => {
+    service.getCountryByCode('1').subscribe();
+
+    const { request } = httpMock.expectOne('https://restcountries.com/v3.1/alpha/1');
+
+    expect(request.method).toBe('GET');
+  });
+
+  it('should get country by a list of codes', () => {
+    service.getCountryByCodes(['1', '2'].toString()).subscribe();
+
+    const { request } = httpMock.expectOne('https://restcountries.com/v3.1/alpha?codes=1,2');
+
+    expect(request.method).toBe('GET');
+  });
 });
