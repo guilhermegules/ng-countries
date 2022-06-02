@@ -28,7 +28,6 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 - [x] Toggle the color scheme between light and dark mode _(optional)_
 - [x] Unit tests - 100% coverage
 - [x] e2e/integration tests
-- [] Docker / docker-compose container
 
 ### :play_or_pause_button: Demo
 
