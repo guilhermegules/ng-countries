@@ -12,7 +12,9 @@
     </button>
 
     <div class="country-details__info">
-      <img data-testid="details-country-image" [src]="country.flags.svg" [alt]="country.name.common + ' flag'" />
+      <div class="country-details__info-image">
+        <img data-testid="details-country-image" [src]="country.flags.svg" [alt]="country.name.common + ' flag'" />
+      </div>
       <div>
         <h2>{{ country.name.common }}</h2>
         <div class="country-details__box-container">
