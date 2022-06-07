@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, finalize, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { debounceTime, finalize, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 import { RegionEnum } from '../../enums/region.enum';
 
 import { Country } from '../../models/country.model';
@@ -34,7 +34,7 @@ export class CountryListComponent implements OnInit, OnDestroy {
         finalize(() => {
           this.loading = false;
         }),
-        takeUntil(this.destroyed$),
+        take(1),
       )
       .subscribe(countries => {
         this.countries = countries;
@@ -42,7 +42,7 @@ export class CountryListComponent implements OnInit, OnDestroy {
 
     this.regions = Object.values(RegionEnum).map(value => ({
       value,
-      label: value[0].toUpperCase() + value.slice(1),
+      label: `${value[0].toUpperCase()}${value.slice(1)}`,
     }));
 
     this.formFieldListeners();
@@ -72,14 +72,22 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap(this.countryService.getCountryByName),
-        finalize(() => {
-          this.loading = false;
-        }),
+        switchMap(search =>
+          this.countryService.getCountryByName(search).pipe(
+            finalize(() => {
+              this.loading = false;
+            }),
+          ),
+        ),
         takeUntil(this.destroyed$),
       )
-      .subscribe(countries => {
-        this.countries = countries;
+      .subscribe({
+        next: countries => {
+          this.countries = countries;
+        },
+        error: () => {
+          this.countries = [];
+        },
       });
 
     this.form
@@ -89,10 +97,13 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap(this.countryService.getCountriesByRegion),
-        finalize(() => {
-          this.loading = false;
-        }),
+        switchMap(region =>
+          this.countryService.getCountriesByRegion(region).pipe(
+            finalize(() => {
+              this.loading = false;
+            }),
+          ),
+        ),
         takeUntil(this.destroyed$),
       )
       .subscribe(countries => {
