@@ -27,7 +27,7 @@
       </select>
     </form>
 
-    <div class="country-list__cards-container">
+    <div class="country-list__cards-container" *ngIf="countries.length; else empty">
       <div *ngFor="let country of countries; let i = index" [attr.data-testid]="'country-card-' + i">
         <app-country-card [country]="country" (onClick)="onCountryClick($event)"></app-country-card>
       </div>
@@ -37,4 +37,8 @@
 
 <ng-template #loader>
   <app-loader [loading]="loading"></app-loader>
+</ng-template>
+
+<ng-template #empty>
+  <h2>Any country found</h2>
 </ng-template>
