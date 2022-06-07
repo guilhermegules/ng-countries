@@ -1,4 +1,4 @@
-@import "form-control";
+@import 'form-control';
 
 :host {
   display: flex;
@@ -23,7 +23,7 @@
         grid-template-columns: repeat(6, 1fr);
       }
 
-      @media screen and (max-width: 810px) {
+      @media screen and (max-width: 820px) {
         grid-template-columns: repeat(3, 1fr);
       }
 
@@ -33,5 +33,4 @@
       }
     }
   }
-
 }
