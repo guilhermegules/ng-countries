@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryDetailsComponent } from './country-details.component';
@@ -24,6 +25,7 @@ describe('CountryDetailsComponent', () => {
           useValue: { snapshot: { params: { countryName: 'Brazil' } } },
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

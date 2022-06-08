@@ -3,7 +3,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CountryListComponent } from './country-list.component';
 import { CountryService } from '../../services/country.service';
@@ -71,6 +72,7 @@ describe('CountryListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CountryListComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -102,6 +104,27 @@ describe('CountryListComponent', () => {
 
       component.ngOnInit();
       component.form.get('search')?.setValue('brazil');
+      tick(600);
+
+      expect(component.countries).toEqual(countriesMock);
+    }));
+
+    it('should set an empty list on countries when endpoint return error', fakeAsync(() => {
+      spyOn(countryService, 'getCountryByName').and.returnValue(throwError(() => new Error('error')));
+
+      component.ngOnInit();
+      component.form.get('search')?.setValue('123');
+      tick(600);
+
+      expect(component.countries).toEqual([]);
+    }));
+
+    it('should call the service to get all the countries when search is a empty string', fakeAsync(() => {
+      spyOn(countryService, 'getCountryByName').and.returnValue(throwError(() => new Error('error')));
+      spyOn(countryService, 'getAllCountries').and.returnValue(of(countriesMock));
+
+      component.ngOnInit();
+      component.form.get('search')?.setValue('');
       tick(600);
 
       expect(component.countries).toEqual(countriesMock);

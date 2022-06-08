@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, finalize, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
+import { catchError, debounceTime, EMPTY, finalize, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 import { RegionEnum } from '../../enums/region.enum';
 
 import { Country } from '../../models/country.model';
@@ -28,17 +28,9 @@ export class CountryListComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.initForm();
 
-    this.countryService
-      .getAllCountries()
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        }),
-        take(1),
-      )
-      .subscribe(countries => {
-        this.countries = countries;
-      });
+    this.getAllCountries().subscribe(countries => {
+      this.countries = countries;
+    });
 
     this.regions = Object.values(RegionEnum).map(value => ({
       value,
@@ -72,22 +64,18 @@ export class CountryListComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
         }),
-        switchMap(search =>
-          this.countryService.getCountryByName(search).pipe(
-            finalize(() => {
-              this.loading = false;
-            }),
-          ),
-        ),
+        switchMap(search => {
+          console.log(search);
+          return this.countryService
+            .getCountryByName(search)
+            .pipe(catchError(() => (search === '' ? this.getAllCountries() : of([]))));
+        }),
         takeUntil(this.destroyed$),
       )
-      .subscribe({
-        next: countries => {
-          this.countries = countries;
-        },
-        error: () => {
-          this.countries = [];
-        },
+      .subscribe(countries => {
+        console.log(countries);
+        this.countries = countries;
+        this.loading = false;
       });
 
     this.form
@@ -109,5 +97,14 @@ export class CountryListComponent implements OnInit, OnDestroy {
       .subscribe(countries => {
         this.countries = countries;
       });
+  }
+
+  private getAllCountries() {
+    return this.countryService.getAllCountries().pipe(
+      finalize(() => {
+        this.loading = false;
+      }),
+      take(1),
+    );
   }
 }
